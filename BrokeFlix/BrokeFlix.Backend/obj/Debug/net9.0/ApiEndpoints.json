@@ -1,0 +1,111 @@
+[
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetDetailOfSeries",
+    "RelativePath": "api/SerienStream/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetEpisodesOfSeries",
+    "RelativePath": "api/SerienStream/{name}/episodes/{season}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "season",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetEpisodeOfSeasonDetails",
+    "RelativePath": "api/SerienStream/{name}/season/{season}/episode/{episode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "season",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "episode",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetAllSeries",
+    "RelativePath": "api/SerienStream/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BrokeFlix.Infrastructure.SerienStreamAPI.Models.GroupedSeries, BrokeFlix.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetPopularSeries",
+    "RelativePath": "api/SerienStream/popular",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BrokeFlix.Backend.Controllers.SerienStreamController",
+    "Method": "GetStreamUrl",
+    "RelativePath": "api/SerienStream/streamUrl",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "streamGrab",
+        "Type": "BrokeFlix.Backend.Dto.StreamGrabDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

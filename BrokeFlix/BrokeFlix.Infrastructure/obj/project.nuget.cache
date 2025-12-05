@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "mLJ7Q3D5d1M=",
+  "success": true,
+  "projectFilePath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Patrick\\.nuget\\packages\\htmlagilitypack\\1.12.4\\htmlagilitypack.1.12.4.nupkg.sha512",
+    "C:\\Users\\Patrick\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\Patrick\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.0\\microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\Patrick\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.0\\system.diagnostics.diagnosticsource.10.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
