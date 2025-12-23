@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj": {}
+    "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj": {}
   },
   "projects": {
-    "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj": {
+    "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj",
+        "projectUniqueName": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj",
         "projectName": "BrokeFlix.Backend",
-        "projectPath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj",
-        "packagesPath": "C:\\Users\\Patrick\\.nuget\\packages\\",
-        "outputPath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Backend\\obj\\",
+        "projectPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\BrokeFlix.Backend.csproj",
+        "packagesPath": "C:\\Users\\Patri\\.nuget\\packages\\",
+        "outputPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Patrick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Patri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,14 +27,15 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/PatrickMisti/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj": {
-                "projectPath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj"
+              "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj": {
+                "projectPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj"
               }
             }
           }
@@ -79,24 +80,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj": {
+    "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj",
+        "projectUniqueName": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj",
         "projectName": "BrokeFlix.Infrastructure",
-        "projectPath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Patrick\\.nuget\\packages\\",
-        "outputPath": "F:\\University\\Semester_5\\Sma\\BrokeFlix\\BrokeFlix.Infrastructure\\obj\\",
+        "projectPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Patri\\.nuget\\packages\\",
+        "outputPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Patrick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Patri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -106,7 +107,8 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/PatrickMisti/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -155,7 +157,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

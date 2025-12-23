@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrokeFlix.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2521525f038f339345d855754dc79eaf7e619a80")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrokeFlix.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrokeFlix.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
