@@ -2,6 +2,7 @@
 import 'package:brokeflix_client/core/shared/models/hoster_enum.dart';
 import 'package:brokeflix_client/core/shared/models/language_model.dart';
 import 'package:brokeflix_client/core/shared/utils/hoster_ext.dart';
+import 'package:flutter/material.dart';
 
 class Episode {
   final int number;
@@ -39,4 +40,11 @@ class Episode {
     'hosters': hosters.map((i) => i.displayName).toList(),
     'languages': languages.map((e) => e.toJson()).toList(),
   };
+
+  DropdownMenuItem<int> toDropdownMenuItem() {
+    return DropdownMenuItem<int>(
+      value: number,
+      child: Text(title),
+    );
+  }
 }

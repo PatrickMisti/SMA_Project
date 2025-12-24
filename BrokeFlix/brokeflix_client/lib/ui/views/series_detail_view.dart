@@ -6,13 +6,14 @@ import 'package:stacked/stacked.dart';
 
 class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
   final Series series;
-  final sliverAppBarHeight = 250.0;
+  final _sliverAppBarHeight = 250.0;
+  final _defaultEdgeInsets = 16.0;
 
   const SeriesDetailView({super.key, required this.series});
 
   _buildSliverAppBar(SeriesDetailViewModel vm) {
     return SliverAppBar(
-      expandedHeight: sliverAppBarHeight,
+      expandedHeight: _sliverAppBarHeight,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         // title: Text(series.title),
@@ -30,7 +31,15 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
       body: CustomScrollView(
         slivers: [
           _buildSliverAppBar(vm),
-          SliverToBoxAdapter(child: SeriesDetailBodyWidget(series: series)),
+          SliverToBoxAdapter(
+            child: Card(
+              margin: EdgeInsets.all(_defaultEdgeInsets),
+              child: Padding(
+                padding: EdgeInsets.all(_defaultEdgeInsets),
+                child: SeriesDetailBodyWidget(viewModel: vm),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -38,5 +47,5 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
 
   @override
   SeriesDetailViewModel viewModelBuilder(BuildContext context) =>
-      SeriesDetailViewModel(series);
+      SeriesDetailViewModel(series: series);
 }

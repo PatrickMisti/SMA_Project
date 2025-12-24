@@ -25,7 +25,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
         return Ok(series);
     }
 
-    [HttpGet("{name}/episodes/{season}")]
+    [HttpGet("{name}/season/{season}")]
     [ProducesResponseType(typeof(List<Media>), 201)]
     public async Task<ActionResult> GetEpisodesOfSeries(string name, int season, CancellationToken token)
     {

@@ -1,6 +1,6 @@
 class Language {
   final String audio;
-  final String subtitle;
+  final String? subtitle;
 
   Language({
     required this.audio,
@@ -10,7 +10,7 @@ class Language {
   factory Language.fromJson(Map<String, dynamic> json) {
     return Language(
       audio: json['audio'] as String,
-      subtitle: json['subtitle'] as String,
+      subtitle: json['subtitle'] as String?,
     );
   }
 
