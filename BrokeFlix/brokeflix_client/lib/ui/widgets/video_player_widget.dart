@@ -1,4 +1,3 @@
-import 'package:brokeflix_client/core/shared/models/episode_model.dart';
 import 'package:brokeflix_client/core/shared/models/video_detail_model.dart';
 import 'package:brokeflix_client/ui/views/fullscreen_video_player_view.dart';
 import 'package:flutter/material.dart';
