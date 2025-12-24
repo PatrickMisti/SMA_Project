@@ -1,4 +1,3 @@
-
 import 'package:brokeflix_client/core/shared/models/rating_model.dart';
 
 class Series {

@@ -1,6 +1,7 @@
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
 import 'package:brokeflix_client/core/view_models/series_detail_viewmodel.dart';
 import 'package:brokeflix_client/ui/widgets/series_detail_body_widget.dart';
+import 'package:brokeflix_client/ui/widgets/video_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -40,6 +41,8 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
               ),
             ),
           ),
+          if (vm.selectedHoster != null && vm.selectedEpisode != null)
+            SliverToBoxAdapter(child: VideoPlayerWidget()),
         ],
       ),
     );

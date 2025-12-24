@@ -1,5 +1,6 @@
 import 'package:brokeflix_client/core/shared/models/episode_model.dart';
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
+import 'package:brokeflix_client/core/shared/models/video_detail_model.dart';
 import 'package:brokeflix_client/core/shared/utils/app_logger.dart';
 import 'package:brokeflix_client/core/shared/utils/config_wrapper.dart';
 import 'package:stacked/stacked.dart';
@@ -9,6 +10,9 @@ import 'package:brokeflix_client/core/shared/utils/http_wrapper.dart' as http;
 class SeriesDetailViewModel extends BaseViewModel {
   final Series series;
   final logger = AppLogger.getLogger("SeriesDetailViewModel");
+
+  VideoDetail? selectedEpisode;
+  String? selectedHoster;
 
   SeriesDetailViewModel({required this.series});
 
@@ -23,5 +27,18 @@ class SeriesDetailViewModel extends BaseViewModel {
     final episodes = await http.getList(ConfigWrapper.episodeOfSeasonUrl(series.title, season), Episode.fromJson);
     logger.info("fetch data from series ${series.title} season $season: ${episodes.length} episodes found");
     return episodes;
+  }
+
+  updateSelectedEpisodeAndHoster(int season, int episode, String hoster) async {
+    selectedHoster = hoster;
+    try {
+      logger.info("Fetching episode detail for ${series.title} S${season}E${episode}");
+      selectedEpisode = await http.get(ConfigWrapper.episodeUrl(series.title, season, episode), VideoDetail.fromJson);
+    } catch (e) {
+      logger.severe("Error fetching episode detail: $e");
+      selectedEpisode = null;
+    }
+
+    notifyListeners();
   }
 }

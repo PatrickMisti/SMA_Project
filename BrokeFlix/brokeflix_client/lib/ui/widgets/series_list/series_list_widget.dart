@@ -31,7 +31,7 @@ class _SeriesListWidgetState extends State<SeriesListWidget> {
       ),
       delegate: SliverChildBuilderDelegate(
             (context, index) =>
-            SeriesItemWidget(series: seriesList[index]),
+            SeriesItemWidget(key: ValueKey(index), series: seriesList[index]),
         childCount: seriesList.length,
       ),
     );

@@ -1,4 +1,3 @@
-
 import 'package:brokeflix_client/core/shared/models/hoster_enum.dart';
 import 'package:brokeflix_client/core/shared/models/language_model.dart';
 import 'package:brokeflix_client/core/shared/utils/hoster_ext.dart';
@@ -46,5 +45,12 @@ class Episode {
       value: number,
       child: Text(title),
     );
+  }
+
+  List<DropdownMenuItem<String>> toHosterMenuItem() {
+    return hosters.map((hoster) => DropdownMenuItem<String>(
+      value: hoster.displayName,
+      child: Text(hoster.displayName),
+    )).toList();
   }
 }

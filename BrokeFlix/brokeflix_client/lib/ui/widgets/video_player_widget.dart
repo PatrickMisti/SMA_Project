@@ -15,7 +15,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    // Network-URL – läuft auf Android, Web und Tizen
     _controller = VideoPlayerController.networkUrl(
       Uri.parse('https://cdn-rvpuky9hp2glksoq.edgeon-bandwidth.com/engine/hls2/01/09080/jdz4bojzlipl_,n,.urlset/master.m3u8?t=aUP7tRpFfs4LfIY5n0oviGJgMRELkQhdklKvjbhvGzQ&s=1764319322&e=14400&f=66861598&node=bfinFs4uSrnmOxDmHRx4b4ZjH1INnkx85htkLPWfDV4=&i=193.170&sp=2500&asn=1853&q=n&rq=NBnqjnjqW3IibSbjrSASUZdJb7rQT0BXXDbQ3kfM'),
     )
@@ -41,16 +40,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Center(
+      child: _isReady
+          ? AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: VideoPlayer(_controller),
+      )
+          : const CircularProgressIndicator(),
+    );/*Scaffold(
       appBar: AppBar(title: const Text('Video Player')),
-      body: Center(
-        child: _isReady
-            ? AspectRatio(
-          aspectRatio: _controller.value.aspectRatio,
-          child: VideoPlayer(_controller),
-        )
-            : const CircularProgressIndicator(),
-      ),
+      body: ,
       floatingActionButton: _isReady
           ? FloatingActionButton(
         onPressed: _togglePlay,
@@ -59,6 +58,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         ),
       )
           : null,
-    );
+    )*/
   }
 }

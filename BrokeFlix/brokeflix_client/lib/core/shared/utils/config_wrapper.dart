@@ -9,11 +9,13 @@ class ConfigWrapper {
 
   static String get allSeriesUrl => '$_apiUrl/api/serienstream/all';
 
-  static String seasonUrl(String seriesName) => '$_apiUrl/api/serienstream/$seriesName';
+  static String encodeSeriesUrl(String seriesName) => Uri.encodeComponent(seriesName);
 
-  static String episodeOfSeasonUrl(String seriesName, int season) => '$_apiUrl/api/serienstream/$seriesName/season/$season';
+  static String seasonUrl(String seriesName) => '$_apiUrl/api/serienstream/${encodeSeriesUrl(seriesName)}';
 
-  static String episodeUrl(String seriesName, int season, int episode) => '$_apiUrl/api/serienstream/$seriesName/season/$season/episode/$episode';
+  static String episodeOfSeasonUrl(String seriesName, int season) => '$_apiUrl/api/serienstream/${encodeSeriesUrl(seriesName)}/season/$season';
+
+  static String episodeUrl(String seriesName, int season, int episode) => '$_apiUrl/api/serienstream/${encodeSeriesUrl(seriesName)}/season/$season/episode/$episode';
 
   static String get videoUrl => '$_apiUrl/api/serienstream/streamurl';
 }

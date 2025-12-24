@@ -1,4 +1,5 @@
 import 'package:brokeflix_client/core/shared/models/episode_model.dart';
+import 'package:brokeflix_client/core/shared/utils/hoster_ext.dart';
 import 'package:brokeflix_client/core/view_models/series_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,13 @@ class SeriesDetailBodyWidget extends StatefulWidget {
   Future<List<Episode>> getEpisodes(int season) async =>
       await viewModel.fetchEpisodesFromSeason(season);
 
+  void updateSelectedEpisodeAndHoster(int season, int episode, String hoster) =>
+      viewModel.updateSelectedEpisodeAndHoster(season, episode, hoster);
+
   int get seasonsCount => viewModel.series.seasonsCount;
+
   String get title => viewModel.series.title;
+
   String get description => viewModel.series.description;
 
   @override
@@ -23,7 +29,7 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
   List<Episode> episodes = [];
   int? _selectedSeason;
   int? _selectedEpisode;
-
+  String? _selectedHoster;
 
   @override
   void initState() {
@@ -33,12 +39,28 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
       episodes = eps;
       if (episodes.isNotEmpty) {
         _selectedEpisode = episodes.first.number;
+        _selectedHoster = episodes.first.hosters.first.displayName;
+
+        if (_selectedHoster != null && _selectedEpisode != null)
+          notifySelectedEpisodeAndHoster();
       }
       setState(() {});
     });
   }
 
   _spacer({double height = 8}) => SizedBox(height: height);
+
+  void notifySelectedEpisodeAndHoster() {
+    if (_selectedEpisode != null &&
+        _selectedHoster != null &&
+        _selectedSeason != null) {
+      widget.updateSelectedEpisodeAndHoster(
+        _selectedSeason!,
+        _selectedEpisode!,
+        _selectedHoster!,
+      );
+    }
+  }
 
   void changeSeason(int? season) async {
     if (season == null || _selectedSeason == season) return;
@@ -51,6 +73,13 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
     if (episode == null || _selectedEpisode == episode) return;
     _selectedEpisode = episode;
     setState(() {});
+  }
+
+  void changeHoster(String? hoster) {
+    if (hoster == null || _selectedHoster == hoster) return;
+    _selectedHoster = hoster;
+    setState(() {});
+    notifySelectedEpisodeAndHoster();
   }
 
   DropdownMenuItem<int> _buildDropdownItem(int season) =>
@@ -87,6 +116,13 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
               value: _selectedEpisode,
               items: ddEpisodes,
               onChanged: changeEpisode,
+            ),
+            DropdownButton<String>(
+              value: _selectedHoster,
+              items: _selectedEpisode == null
+                  ? []
+                  : episodes[_selectedEpisode!].toHosterMenuItem(),
+              onChanged: changeHoster,
             ),
           ],
         ),
