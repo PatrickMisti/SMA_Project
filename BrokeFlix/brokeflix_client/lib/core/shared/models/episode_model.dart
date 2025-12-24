@@ -40,10 +40,14 @@ class Episode {
     'languages': languages.map((e) => e.toJson()).toList(),
   };
 
-  DropdownMenuItem<int> toDropdownMenuItem() {
+  DropdownMenuItem<int> toDropdownMenuItem({bool fullTitle = true}) {
+    var text = title.length > 10
+        ? '${title.substring(0, 10)}...'
+        : title;
+    text = fullTitle ? title : text;
     return DropdownMenuItem<int>(
       value: number,
-      child: Text(title),
+      child: Text(text),
     );
   }
 

@@ -51,7 +51,7 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
                   onLoading: () => Center(child: CircularProgressIndicator()),
                   onError: (_) => Center(child: Text(_errorMessage)),
                   onEmpty: () => Center(child: Text(_errorMessage)),
-                  onData: (videoUrl) => VideoPlayerWidget(videoUrl: videoUrl!),
+                  onData: (v) => VideoPlayerWidget(videoUrl: v!, detail: vm.selectedEpisode!),
                 ),
               ),
             ),

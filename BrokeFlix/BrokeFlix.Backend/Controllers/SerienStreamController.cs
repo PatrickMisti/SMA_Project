@@ -67,7 +67,12 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     [HttpPost("streamUrl")]
     public async Task<ActionResult> GetStreamUrl([FromBody]StreamGrabDto streamGrab, CancellationToken token)
     {
-        var stream = await service.GetStreamUrl(streamGrab.host, streamGrab.url, token);
+        var stream = await cache.GetOrCreateAsync(streamGrab.url, async entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            return await service.GetStreamUrl(streamGrab.host, streamGrab.url, token);
+        });
+
         if (stream is null)
         {
             logger.LogWarning("Could not find url from host {0} with url {1}", streamGrab.host, streamGrab.url);

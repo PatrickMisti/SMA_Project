@@ -90,7 +90,8 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
     final ThemeData theme = Theme.of(context);
 
     final ddSeries = List.generate(widget.seasonsCount, _buildDropdownItem);
-    final ddEpisodes = episodes.map((e) => e.toDropdownMenuItem()).toList();
+    final ddEpisodes = episodes.map((e) => e.toDropdownMenuItem(fullTitle: false)).toList();
+    final ddEpisodesFull = episodes.map((e) => e.toDropdownMenuItem()).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,8 +115,9 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
             ),
             DropdownButton(
               value: _selectedEpisode,
-              items: ddEpisodes,
+              items: ddEpisodesFull,
               onChanged: changeEpisode,
+              selectedItemBuilder: (context) => ddEpisodes,
             ),
             DropdownButton<String>(
               value: _selectedHoster,
