@@ -68,6 +68,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     {
         var series = await cache.GetOrCreateAsync("popular_series", async entry =>
         {
+            logger.LogInformation("Send Cached Data Popularity");
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
             return await service.GetPopularSeries(token);
         });
@@ -84,7 +85,13 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     [HttpGet("all")]
     public async Task<ActionResult<IEnumerable<GroupedSeries>>> GetAllSeries(CancellationToken token)
     {
-        var series = await service.GetAllSeries(token);
+        var series = await cache.GetOrCreateAsync("all_series", entry =>
+        {
+            logger.LogInformation("Send cached data all");
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(6);
+            return service.GetAllSeries(token);
+        });
+            
         if (series is null || !series.Any())
         {
             logger.LogWarning("Could not find all series");

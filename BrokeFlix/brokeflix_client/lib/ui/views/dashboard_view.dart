@@ -1,6 +1,6 @@
 
 import 'package:brokeflix_client/core/view_models/dashboard_viewmodel.dart';
-import 'package:brokeflix_client/ui/views/start_view.dart';
+import 'package:brokeflix_client/ui/views/popular_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

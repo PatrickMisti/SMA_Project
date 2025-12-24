@@ -18,5 +18,10 @@ class StartViewModel extends BaseViewModel {
       dataService.fetchPopularSeries();
     }
   }
+
+  refreshPopularSeries() async {
+    logger.fine("Refreshing popular series.");
+    await dataService.fetchPopularSeries();
+  }
   // Add properties and methods relevant to the StartViewModel here
 }
