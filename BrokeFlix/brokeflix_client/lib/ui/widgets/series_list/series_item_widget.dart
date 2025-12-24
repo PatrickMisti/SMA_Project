@@ -1,8 +1,10 @@
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
+import 'package:brokeflix_client/ui/views/series_detail_view.dart';
 import 'package:flutter/material.dart';
 
 class SeriesItemWidget extends StatelessWidget {
   final Series series;
+  final String heroTagPrefix = "series_detail_";
 
   const SeriesItemWidget({super.key, required this.series});
 
@@ -24,20 +26,29 @@ class SeriesItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Expanded(
-            flex: 5,
-            child: Image.network(series.bannerUrl),
-          ),
+    return InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => SeriesDetailView(series: series)),
+      ),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Hero(
+                tag: heroTagPrefix + series.bannerUrl,
+                child: Image.network(series.bannerUrl),
+              ),
+            ),
 
-          /*Flexible(
+            /*Flexible(
             flex: 1,
             child: _buildTextSection(),
           ),*/
-        ],
+          ],
+        ),
       ),
     );
   }

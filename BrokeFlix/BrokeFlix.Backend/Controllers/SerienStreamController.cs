@@ -11,6 +11,7 @@ namespace BrokeFlix.Backend.Controllers;
 public class SerienStreamController(SerienStreamService service, IMemoryCache cache, ILogger<SerienStreamController> logger) : ControllerBase
 {
     [HttpGet("{name}")]
+    [ProducesResponseType(typeof(Series), 201)]
     public async Task<ActionResult> GetDetailOfSeries(string name, CancellationToken token)
     {
 
@@ -25,9 +26,16 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     }
 
     [HttpGet("{name}/episodes/{season}")]
+    [ProducesResponseType(typeof(List<Media>), 201)]
     public async Task<ActionResult> GetEpisodesOfSeries(string name, int season, CancellationToken token)
     {
-        var episodes = await service.GetEpisodesOfSeries(name, season, token);
+        var episodes = await cache.GetOrCreateAsync($"{name}-{season}", async entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            return await service.GetEpisodesOfSeries(name, season, token);
+        });
+
+
         if (episodes is null || !episodes.Any())
         {
             logger.LogWarning("Could not find episodes for series: {name}, season: {season}", name, season);
@@ -38,9 +46,15 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     }
 
     [HttpGet("{name}/season/{season}/episode/{episode}")]
+    [ProducesResponseType(typeof(VideoDetails), 201)]
     public async Task<ActionResult> GetEpisodeOfSeasonDetails(string name, int season, int episode, CancellationToken token)
     {
-        var detail = await service.GetVideoDetails(name, season, episode, token);
+        var detail = await cache.GetOrCreateAsync($"{name}-{season}-{episode}", async entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            return await service.GetVideoDetails(name, season, episode, token);
+        });
+
         if (detail is null)
         {
             logger.LogWarning("Could not find details for series: {name}, season: {season}, episode: {episode}", name, season, episode);
