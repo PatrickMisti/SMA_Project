@@ -16,16 +16,37 @@ Future _getRaw(String url) async {
   return jsonDecode(response.body);
 }
 
-final logger = AppLogger.getLogger("HttpWrapper");
+final _logger = AppLogger.getLogger("HttpWrapper");
 
 Future<T> get<T>(String url, Parser<T> parser) async {
-  logger.info("Request: $url");
+  _logger.info("Request: $url");
   final data = await _getRaw(url);
   return parser(data);
 }
 
 Future<List<T>> getList<T>(String url, Parser<T> parser) async {
-  logger.info("Request: $url");
+  _logger.info("Request: $url");
   final data = await _getRaw(url);
   return (data as List).map<T>((json) => parser(json)).toList();
+}
+
+Future<T> post<T>(String url, Map<String, dynamic> body, Parser<T> parser) async {
+  final data = await postRaw(url, body);
+  return parser(jsonDecode(data));
+}
+
+Future postRaw(String url, Map<String, dynamic> body) async {
+  _logger.info("Request: $url");
+  final uri = Uri.parse(url);
+  var response = await http.post(
+    uri,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode != 200) {
+    throw Exception('Failed to load data');
+  }
+
+  return response.body;
 }

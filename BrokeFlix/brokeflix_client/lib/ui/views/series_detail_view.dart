@@ -1,4 +1,5 @@
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
+import 'package:brokeflix_client/core/shared/utils/async_snapshot_extensions.dart';
 import 'package:brokeflix_client/core/view_models/series_detail_viewmodel.dart';
 import 'package:brokeflix_client/ui/widgets/series_detail_body_widget.dart';
 import 'package:brokeflix_client/ui/widgets/video_player_widget.dart';
@@ -9,6 +10,7 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
   final Series series;
   final _sliverAppBarHeight = 250.0;
   final _defaultEdgeInsets = 16.0;
+  final _errorMessage = "Failed to load video stream.";
 
   const SeriesDetailView({super.key, required this.series});
 
@@ -42,7 +44,17 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
             ),
           ),
           if (vm.selectedHoster != null && vm.selectedEpisode != null)
-            SliverToBoxAdapter(child: VideoPlayerWidget()),
+            SliverToBoxAdapter(
+              child: FutureBuilder(
+                future: vm.loadVideoUrl(),
+                builder: (context, snapshot) => snapshot.loadSnapshot<String>(
+                  onLoading: () => Center(child: CircularProgressIndicator()),
+                  onError: (_) => Center(child: Text(_errorMessage)),
+                  onEmpty: () => Center(child: Text(_errorMessage)),
+                  onData: (videoUrl) => VideoPlayerWidget(videoUrl: videoUrl!),
+                ),
+              ),
+            ),
         ],
       ),
     );

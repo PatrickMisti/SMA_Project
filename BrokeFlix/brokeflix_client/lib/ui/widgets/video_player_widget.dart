@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({super.key});
+  final String videoUrl;
+  const VideoPlayerWidget({super.key, required this.videoUrl});
 
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
@@ -16,7 +17,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
-      Uri.parse('https://cdn-rvpuky9hp2glksoq.edgeon-bandwidth.com/engine/hls2/01/09080/jdz4bojzlipl_,n,.urlset/master.m3u8?t=aUP7tRpFfs4LfIY5n0oviGJgMRELkQhdklKvjbhvGzQ&s=1764319322&e=14400&f=66861598&node=bfinFs4uSrnmOxDmHRx4b4ZjH1INnkx85htkLPWfDV4=&i=193.170&sp=2500&asn=1853&q=n&rq=NBnqjnjqW3IibSbjrSASUZdJb7rQT0BXXDbQ3kfM'),
+      Uri.parse(widget.videoUrl),
     )
       ..initialize().then((_) {
         setState(() => _isReady = true);

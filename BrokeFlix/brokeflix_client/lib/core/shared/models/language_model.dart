@@ -9,7 +9,7 @@ class Language {
 
   factory Language.fromJson(Map<String, dynamic> json) {
     return Language(
-      audio: json['audio'] as String,
+      audio: (json['audio'] as String).toLowerCase(),
       subtitle: json['subtitle'] as String?,
     );
   }

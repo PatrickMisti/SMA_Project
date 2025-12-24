@@ -64,7 +64,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
         return Ok(detail);
     }
 
-    [HttpPost("streamUrl/")]
+    [HttpPost("streamUrl")]
     public async Task<ActionResult> GetStreamUrl([FromBody]StreamGrabDto streamGrab, CancellationToken token)
     {
         var stream = await service.GetStreamUrl(streamGrab.host, streamGrab.url, token);
