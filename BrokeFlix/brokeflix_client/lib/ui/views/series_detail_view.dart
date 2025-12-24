@@ -8,20 +8,16 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
   final Series series;
   final sliverAppBarHeight = 250.0;
 
-  late String heroTag;
+  const SeriesDetailView({super.key, required this.series});
 
-  SeriesDetailView({super.key, required this.series}) {
-    heroTag = "series_detail_${series.bannerUrl}";
-  }
-
-  _buildSliverAppBar() {
+  _buildSliverAppBar(SeriesDetailViewModel vm) {
     return SliverAppBar(
       expandedHeight: sliverAppBarHeight,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         // title: Text(series.title),
         background: Hero(
-          tag: heroTag,
+          tag: vm.heroTag,
           child: Image.network(series.bannerUrl, fit: BoxFit.cover),
         ),
       ),
@@ -33,7 +29,7 @@ class SeriesDetailView extends StackedView<SeriesDetailViewModel> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _buildSliverAppBar(),
+          _buildSliverAppBar(vm),
           SliverToBoxAdapter(child: SeriesDetailBodyWidget(series: series)),
         ],
       ),
