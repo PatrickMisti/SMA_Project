@@ -1,23 +1,39 @@
-
+import 'package:brokeflix_client/core/shared/models/series_model.dart';
+import 'package:brokeflix_client/core/shared/utils/app_logger.dart';
+import 'package:brokeflix_client/core/shared/utils/async_snapshot_extensions.dart';
 import 'package:brokeflix_client/core/view_models/start_viewmodel.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:brokeflix_client/ui/widgets/series_list/series_item_widget.dart';
+import 'package:brokeflix_client/ui/widgets/series_list/series_list_widget.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class StartView extends StackedView<StartViewModel> {
-  const StartView({super.key});
+  final logger = AppLogger.getLogger('StartView');
+  StartView({super.key});
+
+  Widget _buildSeriesList(List<Series>? seriesList) {
+    if (seriesList == null || seriesList.isEmpty) {
+      return Center(child: Text('No popular series available.'));
+    }
+
+    logger.fine("Building series list with ${seriesList.length} items.");
+    return SeriesListWidget(seriesList: seriesList);
+  }
 
   @override
-  Widget builder(
-    BuildContext context,
-    StartViewModel viewModel,
-    Widget? child,
-  ) {
-    // Implement the UI for the StartView here
-    return Container(child: Text("hallo"),); // Placeholder
+  Widget builder(BuildContext context, StartViewModel viewModel, _) {
+    return StreamBuilder(
+      stream: viewModel.popularSeriesStream.stream,
+      builder: (context, snapshot) => snapshot.loadSnapshot<List<Series>>(
+        onLoading: () => Center(child: CircularProgressIndicator()),
+        onError: (error) => Center(child: Text('Error: $error')),
+        onData: _buildSeriesList,
+      ),
+    );
   }
 
   @override
   StartViewModel viewModelBuilder(BuildContext context) {
-    return StartViewModel();
+    return StartViewModel()..registerServices();
   }
 }

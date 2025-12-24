@@ -2,12 +2,13 @@
 using BrokeFlix.Backend.Services;
 using BrokeFlix.Infrastructure.SerienStreamAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BrokeFlix.Backend.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class SerienStreamController(SerienStreamService service, ILogger<SerienStreamController> logger) : ControllerBase
+public class SerienStreamController(SerienStreamService service, IMemoryCache cache, ILogger<SerienStreamController> logger) : ControllerBase
 {
     [HttpGet("{name}")]
     public async Task<ActionResult> GetDetailOfSeries(string name, CancellationToken token)
@@ -65,7 +66,13 @@ public class SerienStreamController(SerienStreamService service, ILogger<SerienS
     [HttpGet("popular")]
     public async Task<ActionResult> GetPopularSeries(CancellationToken token)
     {
-        var series = await service.GetPopularSeries(token);
+        var series = await cache.GetOrCreateAsync("popular_series", async entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
+            return await service.GetPopularSeries(token);
+        });
+
+        // todo retry logic in case of failure
         if (series is null || !series.Any())
         {
             logger.LogWarning("Could not find popular series");

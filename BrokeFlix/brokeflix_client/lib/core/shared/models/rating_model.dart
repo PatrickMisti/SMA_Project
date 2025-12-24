@@ -1,6 +1,6 @@
 class Rating {
   final double value;
-  final int votes;
+  final int? votes;
 
   Rating({required this.value, required this.votes});
 

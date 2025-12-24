@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|c:\\university\\semester5\\sma\\sma_project\\brokeflix\\brokeflix.infrastructure\\serienstreamapi\\client\\serienstreamclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|solutionrelative:brokeflix.infrastructure\\serienstreamapi\\client\\serienstreamclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E162A779-03A5-4089-8D1A-18CE1774E834}|BrokeFlix.Backend\\BrokeFlix.Backend.csproj|c:\\university\\semester5\\sma\\sma_project\\brokeflix\\brokeflix.backend\\controllers\\serienstreamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E162A779-03A5-4089-8D1A-18CE1774E834}|BrokeFlix.Backend\\BrokeFlix.Backend.csproj|solutionrelative:brokeflix.backend\\controllers\\serienstreamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E4F186B2-387E-427F-9953-7522EF8AA36D}|BrokeFlix.Tests\\BrokeFlix.Tests.csproj|c:\\university\\semester5\\sma\\sma_project\\brokeflix\\brokeflix.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E4F186B2-387E-427F-9953-7522EF8AA36D}|BrokeFlix.Tests\\BrokeFlix.Tests.csproj|solutionrelative:brokeflix.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|c:\\university\\semester5\\sma\\sma_project\\brokeflix\\brokeflix.infrastructure\\serienstreamapi\\models\\searchseries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|solutionrelative:brokeflix.infrastructure\\serienstreamapi\\models\\searchseries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|c:\\university\\semester5\\sma\\sma_project\\brokeflix\\brokeflix.infrastructure\\serienstreamapi\\client\\serienstreamclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0644E9EF-E0EC-476F-B041-9D6F3886F5B5}|BrokeFlix.Infrastructure\\BrokeFlix.Infrastructure.csproj|solutionrelative:brokeflix.infrastructure\\serienstreamapi\\client\\serienstreamclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,32 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "SerienStreamController.cs",
+              "DocumentMoniker": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\Controllers\\SerienStreamController.cs",
+              "RelativeDocumentMoniker": "BrokeFlix.Backend\\Controllers\\SerienStreamController.cs",
+              "ToolTip": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Backend\\Controllers\\SerienStreamController.cs",
+              "RelativeToolTip": "BrokeFlix.Backend\\Controllers\\SerienStreamController.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAkwEYAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T17:10:32.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Tests\\UnitTest1.cs",
               "RelativeDocumentMoniker": "BrokeFlix.Tests\\UnitTest1.cs",
               "ToolTip": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Tests\\UnitTest1.cs",
               "RelativeToolTip": "BrokeFlix.Tests\\UnitTest1.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAgwF0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAAwEMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-05T10:48:15.591Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SearchSeries.cs",
               "DocumentMoniker": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\SerienStreamAPI\\Models\\SearchSeries.cs",
               "RelativeDocumentMoniker": "BrokeFlix.Infrastructure\\SerienStreamAPI\\Models\\SearchSeries.cs",
@@ -55,19 +84,21 @@
               "RelativeToolTip": "BrokeFlix.Infrastructure\\SerienStreamAPI\\Models\\SearchSeries.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAA0wA0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T10:40:44.654Z"
+              "WhenOpened": "2025-12-05T10:40:44.654Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "SerienStreamClient.cs",
               "DocumentMoniker": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\SerienStreamAPI\\Client\\SerienStreamClient.cs",
               "RelativeDocumentMoniker": "BrokeFlix.Infrastructure\\SerienStreamAPI\\Client\\SerienStreamClient.cs",
               "ToolTip": "C:\\University\\Semester5\\Sma\\SMA_Project\\BrokeFlix\\BrokeFlix.Infrastructure\\SerienStreamAPI\\Client\\SerienStreamClient.cs",
               "RelativeToolTip": "BrokeFlix.Infrastructure\\SerienStreamAPI\\Client\\SerienStreamClient.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAxwF4AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAwEYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T10:33:41.956Z"
+              "WhenOpened": "2025-12-05T10:33:41.956Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using BrokeFlix.Backend.Services;
 
@@ -12,7 +13,12 @@ builder.Services
     .AddJsonOptions(opt =>
     {
         opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
+
+builder.Services.AddMemoryCache();
+
+builder.Services.AddRouting(o => o.LowercaseUrls = true);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,8 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+if (!app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

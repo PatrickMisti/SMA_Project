@@ -50,12 +50,25 @@ public class SerienStreamClient
     {
         HtmlNode root = await GetHtmlRootAsync($"{popUrl}", cancellationToken);
 
-        var nodes = root.SelectNodes("//div[contains(@class, 'seriesListContainer')]//a[@title]");
-        var names = nodes.Select(element => element.SelectSingleNode("//h3").InnerText);
+        var nodes = root.SelectNodes("//div[contains(@class, 'seriesListContainer')]//a[@title]//h3");
+        //var names = nodes.Select(element => element.SelectSingleNode("//h3").InnerText);
 
-        var series = names.Select(async name => await GetSeriesAsync(name, cancellationToken));
+        var series = nodes.Select(async name =>
+        {
+            try
+            {
+                return await GetSeriesAsync(name.InnerText, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        });
 
-        return await Task.WhenAll(series);
+        var result = await Task.WhenAll(series);
+
+        return result.Where(s => s != null)!;
     }
 
     public async Task<IEnumerable<GroupedSeries>> GetAllSeriesAsync(string popUrl,
