@@ -6,6 +6,8 @@ import 'package:stacked/stacked.dart';
 
 class DashboardView extends StackedView<DashboardViewModel> {
   final _title = "Brokeflix";
+  final _newSiteTitle = "Neue";
+  final _searchTitle = "Suche";
 
   const DashboardView({super.key});
 
@@ -30,8 +32,8 @@ class DashboardView extends StackedView<DashboardViewModel> {
         currentIndex: viewModel.currentIndex,
         onTap: viewModel.updateCurrentIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: _newSiteTitle),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: _searchTitle),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),

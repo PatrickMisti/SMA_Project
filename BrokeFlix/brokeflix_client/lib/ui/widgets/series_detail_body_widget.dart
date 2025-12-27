@@ -41,8 +41,9 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
         _selectedEpisode = episodes.first.number;
         _selectedHoster = episodes.first.hosters.first.displayName;
 
-        if (_selectedHoster != null && _selectedEpisode != null)
+        if (_selectedHoster != null && _selectedEpisode != null) {
           notifySelectedEpisodeAndHoster();
+        }
       }
       setState(() {});
     });
@@ -73,6 +74,7 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
     if (episode == null || _selectedEpisode == episode) return;
     _selectedEpisode = episode;
     setState(() {});
+    notifySelectedEpisodeAndHoster();
   }
 
   void changeHoster(String? hoster) {
@@ -123,7 +125,7 @@ class _SeriesDetailBodyWidgetState extends State<SeriesDetailBodyWidget> {
               value: _selectedHoster,
               items: _selectedEpisode == null
                   ? []
-                  : episodes[_selectedEpisode!].toHosterMenuItem(),
+                  : episodes[_selectedEpisode! - 1].toHosterMenuItem(),
               onChanged: changeHoster,
             ),
           ],
