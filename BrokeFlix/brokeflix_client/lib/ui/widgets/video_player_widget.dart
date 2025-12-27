@@ -1,5 +1,7 @@
 import 'package:brokeflix_client/core/shared/models/video_detail_model.dart';
-import 'package:brokeflix_client/ui/views/fullscreen_video_player_view.dart';
+import 'package:brokeflix_client/core/view_models/video_player_viewmodel.dart';
+import 'package:brokeflix_client/ui/widgets/fullscreen_video_player_widget.dart';
+import 'package:brokeflix_client/ui/views/video_player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
@@ -20,18 +22,18 @@ class VideoPlayerWidget extends StatefulWidget {
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   final _defaultEdgeInsets = 16.0;
-  final _fullScreenLayout = 8.0;
-  late VideoPlayerController _controller;
-  bool _isReady = false;
-  bool _isFullScreen = false;
+  late VideoPlayerViewModel _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
-      ..initialize().then((_) {
-        setState(() => _isReady = true);
-      });
+
+    _controller = VideoPlayerViewModel(
+      path: widget.videoUrl,
+      title: widget.detail.title,
+    );
+
+    _controller.isFullScreen.addListener(_toggleFullScreen);
   }
 
   _spacer({double height = 8}) => SizedBox(height: height);
@@ -53,40 +55,21 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void dispose() async {
     // restore defaults on dispose
     await restoreFullScreen();
-    _controller.pause();
 
     _controller.dispose();
     super.dispose();
   }
 
-  void _togglePlay() {
-    if (_controller.value.isPlaying) {
-      _controller.pause();
-    } else {
-      _controller.play();
-    }
-    setState(() {});
-  }
-
   Future<void> _toggleFullScreen() async {
-    if (_isFullScreen){
-      Navigator.of(context).maybePop();
-      return;
-    }
-
     await enableFullScreen();
-    setState(() => _isFullScreen = true);
 
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => FullScreenVideoPlayerView(controller: _controller, title: widget.detail.title),
+        builder: (_) => FullScreenVideoPlayerView(controller: _controller),
       ),
     );
-
     await restoreFullScreen();
-    setState(() => _isFullScreen = false);
   }
-
 
   Widget _buildVideoPlayer(ThemeData theme) {
     return Card(
@@ -104,33 +87,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               overflow: TextOverflow.ellipsis,
             ),
             _spacer(),
-            InkWell(
-              onTap: _togglePlay,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  ),
-                  if (!_controller.value.isPlaying)
-                    Center(
-                      child: OutlinedButton(
-                        onPressed: _togglePlay,
-                        child: const Icon(Icons.play_arrow),
-                      ),
-                    ),
-                  Positioned(
-                    bottom: _fullScreenLayout,
-                    right: _fullScreenLayout,
-                    child: IconButton(
-                      onPressed: _toggleFullScreen,
-                      icon: Icon(Icons.fullscreen),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            VideoPlayerView(controller: _controller)
           ],
         ),
       ),
@@ -139,9 +96,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isReady) return const Center(child: CircularProgressIndicator());
-
     final theme = Theme.of(context);
-    return Column(children: [_buildVideoPlayer(theme), _spacer(height: _defaultEdgeInsets)]);
+    return Column(
+      children: [
+        _buildVideoPlayer(theme),
+        _spacer(height: _defaultEdgeInsets),
+      ],
+    );
   }
 }
