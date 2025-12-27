@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class SeriesListWidget extends StatefulWidget {
   final List<Series> seriesList;
-  final StartViewModel viewModel;
+  final PopularViewModel viewModel;
 
   const SeriesListWidget({
     super.key,

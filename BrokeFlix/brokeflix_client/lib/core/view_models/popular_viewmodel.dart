@@ -5,9 +5,9 @@ import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:stacked/stacked.dart';
 
-class StartViewModel extends BaseViewModel {
+class PopularViewModel extends BaseViewModel {
   final dataService = GetIt.I.get<DataService>();
-  final logger = AppLogger.getLogger('StartViewModel');
+  final logger = AppLogger.getLogger('PopularViewModel');
 
   BehaviorSubject<List<Series>> get popularSeriesStream =>
       dataService.popularSeriesStream;

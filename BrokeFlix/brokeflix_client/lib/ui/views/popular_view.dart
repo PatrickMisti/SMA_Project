@@ -6,12 +6,12 @@ import 'package:brokeflix_client/ui/widgets/series_list/series_list_widget.dart'
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class StartView extends StackedView<StartViewModel> {
-  final logger = AppLogger.getLogger('StartView');
+class PopularView extends StackedView<PopularViewModel> {
+  final logger = AppLogger.getLogger('PopularView');
 
-  StartView({super.key});
+  PopularView({super.key});
 
-  Widget _buildSeriesList(List<Series>? seriesList, StartViewModel vm) {
+  Widget _buildSeriesList(List<Series>? seriesList, PopularViewModel vm) {
     if (seriesList == null || seriesList.isEmpty) {
       return Center(child: Text('No popular series available.'));
     }
@@ -21,7 +21,7 @@ class StartView extends StackedView<StartViewModel> {
   }
 
   @override
-  Widget builder(BuildContext context, StartViewModel viewModel, _) {
+  Widget builder(BuildContext context, PopularViewModel viewModel, _) {
     return StreamBuilder(
       stream: viewModel.popularSeriesStream.stream,
       builder: (context, snapshot) => snapshot.loadSnapshot<List<Series>>(
@@ -33,7 +33,7 @@ class StartView extends StackedView<StartViewModel> {
   }
 
   @override
-  StartViewModel viewModelBuilder(BuildContext context) {
-    return StartViewModel()..registerServices();
+  PopularViewModel viewModelBuilder(BuildContext context) {
+    return PopularViewModel()..registerServices();
   }
 }

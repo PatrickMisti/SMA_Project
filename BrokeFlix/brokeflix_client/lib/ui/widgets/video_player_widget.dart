@@ -4,7 +4,6 @@ import 'package:brokeflix_client/ui/widgets/fullscreen_video_player_widget.dart'
 import 'package:brokeflix_client/ui/views/video_player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
@@ -23,6 +22,7 @@ class VideoPlayerWidget extends StatefulWidget {
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   final _defaultEdgeInsets = 16.0;
   late VideoPlayerViewModel _controller;
+  late final VoidCallback _fullScreenListener;
 
   @override
   void initState() {
@@ -33,65 +33,48 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       title: widget.detail.title,
     );
 
-    _controller.isFullScreen.addListener(_toggleFullScreen);
+    _fullScreenListener = () {
+      if (!mounted) return;
+      _toggleFullscreen();
+    };
+
+    _controller.isFullScreen.addListener(_fullScreenListener);
+  }
+
+  void _toggleFullscreen() {
+    if (_controller.isFullScreen.value) {
+      enableFullScreen();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => FullScreenVideoPlayerView(controller: _controller),
+        ),
+      );
+    } else {
+      restoreFullScreen();
+    }
   }
 
   _spacer({double height = 8}) => SizedBox(height: height);
 
-  Future enableFullScreen() async {
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    await SystemChrome.setPreferredOrientations([
+  enableFullScreen() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
   }
 
-  Future restoreFullScreen() async {
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  restoreFullScreen() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   @override
-  void dispose() async {
+  void dispose() {
     // restore defaults on dispose
-    await restoreFullScreen();
-
-    _controller.dispose();
+    restoreFullScreen();
+    _controller.isFullScreen.removeListener(_fullScreenListener);
     super.dispose();
-  }
-
-  Future<void> _toggleFullScreen() async {
-    await enableFullScreen();
-
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => FullScreenVideoPlayerView(controller: _controller),
-      ),
-    );
-    await restoreFullScreen();
-  }
-
-  Widget _buildVideoPlayer(ThemeData theme) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      margin: EdgeInsets.all(_defaultEdgeInsets),
-      child: Padding(
-        padding: EdgeInsets.all(_defaultEdgeInsets),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              widget.detail.title,
-              style: theme.textTheme.headlineMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            _spacer(),
-            VideoPlayerView(controller: _controller)
-          ],
-        ),
-      ),
-    );
   }
 
   @override
@@ -99,7 +82,26 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     final theme = Theme.of(context);
     return Column(
       children: [
-        _buildVideoPlayer(theme),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          margin: EdgeInsets.all(_defaultEdgeInsets),
+          child: Padding(
+            padding: EdgeInsets.all(_defaultEdgeInsets),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  widget.detail.title,
+                  style: theme.textTheme.headlineMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                _spacer(),
+                VideoPlayerView(controller: _controller)
+              ],
+            ),
+          ),
+        ),
         _spacer(height: _defaultEdgeInsets),
       ],
     );

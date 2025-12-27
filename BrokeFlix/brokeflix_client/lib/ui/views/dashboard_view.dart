@@ -21,7 +21,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
         controller: viewModel.pageController,
         onPageChanged: viewModel.updateCurrentIndex,
         children: [
-          StartView(),
+          PopularView(),
           Center(child: Text('Dashboard View ${viewModel.currentIndex}')),
           Center(child: Text('Dashboard View ${viewModel.currentIndex}')),
         ],

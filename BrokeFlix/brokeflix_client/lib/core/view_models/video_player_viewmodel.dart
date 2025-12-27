@@ -8,9 +8,12 @@ import 'package:volume_controller/volume_controller.dart';
 class VideoPlayerViewModel extends BaseViewModel {
   late VideoPlayerController _controller;
   late final Future<void> initFuture;
+  late VoidCallback _videoListener;
+  bool _disposed = false;
 
   ValueNotifier<bool> isTapped = ValueNotifier(true);
   Timer? _tapTimer;
+  final _timeSpan = 5;
 
   ValueNotifier<bool> isPlaying = ValueNotifier(false);
   ValueNotifier<bool> isFullScreen = ValueNotifier(false);
@@ -35,12 +38,18 @@ class VideoPlayerViewModel extends BaseViewModel {
       registerVolume();
     }
 
+    _videoListener = () {
+      if (_disposed) return;
+
+      update();
+    };
+
     initFuture = _controller
         .initialize()
         .then((_) {
           pause();
           time.value = _controller.value.duration;
-          _controller.addListener(update);
+          _controller.addListener(_videoListener);
         })
         .catchError((error) {
           debugPrint("error : $error");
@@ -58,6 +67,7 @@ class VideoPlayerViewModel extends BaseViewModel {
   }
 
   void update() {
+    if (_disposed) return;
     currentTime.value = _controller.value.position;
 
     final v = _controller.value;
@@ -108,7 +118,7 @@ class VideoPlayerViewModel extends BaseViewModel {
 
     if (value) {
       _tapTimer = Timer(
-        const Duration(seconds: 2),
+        Duration(seconds: _timeSpan),
         () => isTapped.value = false,
       );
     }
@@ -119,7 +129,7 @@ class VideoPlayerViewModel extends BaseViewModel {
     call?.call();
 
     _tapTimer = Timer(
-      const Duration(seconds: 2),
+      Duration(seconds: _timeSpan),
           () => isTapped.value = false,
     );
   }
@@ -144,7 +154,21 @@ class VideoPlayerViewModel extends BaseViewModel {
 
   @override
   void dispose() {
+    _disposed = true;
+
+    _tapTimer?.cancel();
     _volumeStream?.cancel();
+
+    _controller.removeListener(_videoListener);
+    _controller.dispose();
+
+    isTapped.dispose();
+    isPlaying.dispose();
+    isFullScreen.dispose();
+    time.dispose();
+    currentTime.dispose();
+    currentVolume.dispose();
+
     super.dispose();
   }
 }
