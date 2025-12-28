@@ -14,13 +14,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final title = "BrokeFlix";
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Video Player Demo',
+      title: title,
       theme: ThemeData.dark(),
       home: DashboardView(),
     );
