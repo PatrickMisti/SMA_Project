@@ -1,7 +1,6 @@
 import 'package:brokeflix_client/core/shared/models/group_series_model.dart';
 import 'package:brokeflix_client/core/shared/utils/async_snapshot_extensions.dart';
 import 'package:brokeflix_client/core/view_models/all_series_viewmodel.dart';
-import 'package:brokeflix_client/ui/views/series_detail_view.dart';
 import 'package:brokeflix_client/ui/widgets/series_filter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
