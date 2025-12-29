@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:brokeflix_client/core/shared/models/group_series_model.dart';
+import 'package:brokeflix_client/core/shared/models/search_series_model.dart';
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
 import 'package:brokeflix_client/core/shared/utils/config_wrapper.dart';
 import 'package:get_it/get_it.dart';
@@ -8,15 +10,47 @@ import 'package:brokeflix_client/core/shared/utils/http_wrapper.dart' as http;
 
 class DataService implements Disposable {
   final BehaviorSubject<List<Series>> _popularSeriesSubject;
+  final BehaviorSubject<List<GroupSeries>> _allGroupedSubject;
+  final BehaviorSubject<List<SearchSeries>> _searchSeriesSubject;
 
-  DataService() : _popularSeriesSubject = BehaviorSubject<List<Series>>();
+  DataService()
+    : _popularSeriesSubject = BehaviorSubject<List<Series>>(),
+      _allGroupedSubject = BehaviorSubject<List<GroupSeries>>(),
+      _searchSeriesSubject = BehaviorSubject<List<SearchSeries>>();
 
   BehaviorSubject<List<Series>> get popularSeriesStream =>
       _popularSeriesSubject;
 
-  fetchPopularSeries() async {
-    final seriesList = await http.getList(ConfigWrapper.popularSeriesUrl, Series.fromJson);
+  BehaviorSubject<List<GroupSeries>> get allGroupSeriesStream =>
+      _allGroupedSubject;
+
+  BehaviorSubject<List<SearchSeries>> get searchSeriesStream =>
+      _searchSeriesSubject;
+
+  Future<void> fetchPopularSeries() async {
+    final seriesList = await http.getList(
+      ConfigWrapper.popularSeriesUrl,
+      Series.fromJson,
+    );
     _popularSeriesSubject.add(seriesList);
+  }
+
+  Future<void> fetchAllGroupSeries() async {
+    final seriesList = await http.getList(
+      ConfigWrapper.allSeriesUrl,
+      GroupSeries.fromJson,
+    );
+    _allGroupedSubject.add(seriesList);
+  }
+
+  Future<void> fetchSearchSeries(String search) async {
+    final searchList = await http.getListWithQuery(
+      ConfigWrapper.searchUrl,
+      ConfigWrapper.searchPath,
+      {"search": search},
+      SearchSeries.fromJson,
+    );
+    _searchSeriesSubject.add(searchList);
   }
 
   static void props() {

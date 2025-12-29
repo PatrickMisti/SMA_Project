@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net;
+using Microsoft.Extensions.Logging;
 
 namespace BrokeFlix.Infrastructure.SerienStreamAPI.Internal;
 
@@ -62,6 +63,32 @@ internal class RequestHelper
                 request.Headers.Add(key, value);
 
         logger?.LogInformation("[RequestHelper-GetAsync] Sending HTTP reuqest. GET: {url}.", url);
+        return httpClient.SendAsync(request, cancellationToken);
+    }
+
+    public Task<HttpResponseMessage> PostAsync(
+        string url,
+        string? path = null,
+        HttpContent? content = null,
+        (string key, string value)[]? headers = null,
+        CancellationToken cancellationToken = default)
+    {
+        UriBuilder builder = new(url);
+        if (path is not null)
+            builder.Path = path;
+
+        HttpRequestMessage request = new()
+        {
+            Method = HttpMethod.Post,
+            RequestUri = builder.Uri,
+            Content = content
+        };
+
+        if (headers is not null)
+            foreach ((string key, string value) in headers)
+                request.Headers.Add(key, value);
+
+        logger?.LogInformation("[RequestHelper-PostAsync] Sending HTTP reuqest. POST: {url}.", url);
         return httpClient.SendAsync(request, cancellationToken);
     }
 

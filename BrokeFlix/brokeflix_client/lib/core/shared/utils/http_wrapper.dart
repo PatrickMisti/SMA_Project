@@ -30,6 +30,21 @@ Future<List<T>> getList<T>(String url, Parser<T> parser) async {
   return (data as List).map<T>((json) => parser(json)).toList();
 }
 
+Future<List<T>> getListWithQuery<T>(String url, String path, Map<String, String> query, Parser<T> parser) async {
+  _logger.info("Request: $url with query $query");
+  var uri = url.contains("https")
+      ? Uri.https(url,path,query)
+      : Uri.http(url, path, query);
+
+  var response = await http.get(uri);
+
+  if (response.statusCode != 200) {
+    throw Exception("Failed to load data");
+  }
+  final data = jsonDecode(response.body);
+  return (data as List).map<T>((json) => parser(json)).toList();
+}
+
 Future<T> post<T>(String url, Map<String, dynamic> body, Parser<T> parser) async {
   final data = await postRaw(url, body);
   return parser(jsonDecode(data));

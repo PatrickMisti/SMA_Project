@@ -18,4 +18,8 @@ class ConfigWrapper {
   static String episodeUrl(String seriesName, int season, int episode) => '$_apiUrl/api/serienstream/${encodeSeriesUrl(seriesName)}/season/$season/episode/$episode';
 
   static String get videoUrl => '$_apiUrl/api/serienstream/streamurl';
+
+  static String get searchUrl => '$_apiUrl/api/serienstream';
+
+  static String get searchPath => '/search';
 }

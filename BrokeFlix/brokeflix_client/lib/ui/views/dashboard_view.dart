@@ -23,6 +23,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
       appBar: AppBar(title: Text(_title)),
       body: PageView(
         controller: viewModel.pageController,
+
         onPageChanged: viewModel.updateCurrentIndex,
         children: [
           PopularView(),
@@ -40,6 +41,13 @@ class DashboardView extends StackedView<DashboardViewModel> {
         ],
       ),
     );
+  }
+
+  @override
+  void onViewModelReady(DashboardViewModel viewModel) {
+    // viewModel.updateCurrentIndex(viewModel.currentIndex);
+    super.onViewModelReady(viewModel);
+    debugPrint("hallo");
   }
 
   @override

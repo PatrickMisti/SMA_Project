@@ -96,4 +96,16 @@ public class SerienStreamService(ILogger<SerienStreamService> logger)
         var series = await _client.GetAllSeriesAsync(HostAllSeries, token);
         return series;
     }
+
+    public async Task<IEnumerable<SearchSeries>> SearchForAsync(string search, CancellationToken token)
+    {
+        try
+        {
+            return await _client.GetSearchSeriesAsync(search, token);
+        }
+        catch
+        {
+            return [];
+        }
+    }
 }

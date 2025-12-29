@@ -3,6 +3,7 @@ using BrokeFlix.Backend.Services;
 using BrokeFlix.Infrastructure.SerienStreamAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using SearchSeries = BrokeFlix.Infrastructure.SerienStreamAPI.Models.SearchSeries;
 
 namespace BrokeFlix.Backend.Controllers;
 
@@ -116,6 +117,14 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
             logger.LogWarning("Could not find all series");
             return NotFound();
         }
+        return Ok(series);
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<SearchSeries>>> GetSearchSeries([FromQuery]string search, CancellationToken token)
+    {
+        var series = await service.SearchForAsync(search, token);
+
         return Ok(series);
     }
 }

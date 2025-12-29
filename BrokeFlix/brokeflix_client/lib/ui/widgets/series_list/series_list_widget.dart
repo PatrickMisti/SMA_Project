@@ -1,11 +1,12 @@
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
+import 'package:brokeflix_client/core/shared/utils/interfaces.dart';
 import 'package:brokeflix_client/core/view_models/popular_viewmodel.dart';
 import 'package:brokeflix_client/ui/widgets/series_list/series_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class SeriesListWidget extends StatefulWidget {
   final List<Series> seriesList;
-  final PopularViewModel viewModel;
+  final RefreshBasis viewModel;
 
   const SeriesListWidget({
     super.key,
@@ -19,7 +20,7 @@ class SeriesListWidget extends StatefulWidget {
 
 class _SeriesListWidgetState extends State<SeriesListWidget> {
 
-  Future<void> refresh() async => await widget.viewModel.refreshPopularSeries();
+  Future<void> refresh() async => await widget.viewModel.refreshUi();
 
   _buildGridSliver(List<Series> seriesList) {
     return SliverGrid(
