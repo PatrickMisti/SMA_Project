@@ -1,6 +1,5 @@
 import 'package:brokeflix_client/core/shared/models/series_model.dart';
 import 'package:brokeflix_client/core/shared/utils/interfaces.dart';
-import 'package:brokeflix_client/core/view_models/popular_viewmodel.dart';
 import 'package:brokeflix_client/ui/widgets/series_list/series_item_widget.dart';
 import 'package:flutter/material.dart';
 
