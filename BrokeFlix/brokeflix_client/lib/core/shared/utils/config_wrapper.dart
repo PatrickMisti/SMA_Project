@@ -9,6 +9,8 @@ class ConfigWrapper {
 
   static String get allSeriesUrl => '$_apiUrl/api/serienstream/all';
 
+  static String seriesUrl(String title) => '$_apiUrl/api/serienstream/$title';
+
   static String encodeSeriesUrl(String seriesName) => Uri.encodeComponent(seriesName);
 
   static String seasonUrl(String seriesName) => '$_apiUrl/api/serienstream/${encodeSeriesUrl(seriesName)}';

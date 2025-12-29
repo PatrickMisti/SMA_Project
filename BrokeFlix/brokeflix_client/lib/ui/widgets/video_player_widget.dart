@@ -46,7 +46,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       enableFullScreen();
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => FullScreenVideoPlayerView(controller: _controller),
+          builder: (_) => FullScreenVideoPlayerWidget(controller: _controller),
         ),
       );
     } else {

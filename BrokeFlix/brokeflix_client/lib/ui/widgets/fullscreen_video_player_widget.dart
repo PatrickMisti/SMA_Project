@@ -2,16 +2,16 @@ import 'package:brokeflix_client/core/view_models/video_player_viewmodel.dart';
 import 'package:brokeflix_client/ui/views/video_player_view.dart';
 import 'package:flutter/material.dart';
 
-class FullScreenVideoPlayerView extends StatefulWidget {
+class FullScreenVideoPlayerWidget extends StatefulWidget {
   final VideoPlayerViewModel controller;
 
-  const FullScreenVideoPlayerView({super.key, required this.controller});
+  const FullScreenVideoPlayerWidget({super.key, required this.controller});
 
   @override
-  State<FullScreenVideoPlayerView> createState() => _FullScreenVideoPlayerViewState();
+  State<FullScreenVideoPlayerWidget> createState() => _FullScreenVideoPlayerWidgetState();
 }
 
-class _FullScreenVideoPlayerViewState extends State<FullScreenVideoPlayerView> {
+class _FullScreenVideoPlayerWidgetState extends State<FullScreenVideoPlayerWidget> {
 
   late VoidCallback _returning;
   @override

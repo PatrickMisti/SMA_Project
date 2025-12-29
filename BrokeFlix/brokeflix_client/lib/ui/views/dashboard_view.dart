@@ -44,14 +44,6 @@ class DashboardView extends StackedView<DashboardViewModel> {
   }
 
   @override
-  void onViewModelReady(DashboardViewModel viewModel) {
-    // viewModel.updateCurrentIndex(viewModel.currentIndex);
-    super.onViewModelReady(viewModel);
-    debugPrint("hallo");
-  }
-
-  @override
-  DashboardViewModel viewModelBuilder(BuildContext context) {
-    return DashboardViewModel();
-  }
+  DashboardViewModel viewModelBuilder(BuildContext context) =>
+      DashboardViewModel();
 }
