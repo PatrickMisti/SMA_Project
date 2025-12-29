@@ -14,5 +14,5 @@ public record SearchSeries
     public string Description
     {
         get => _des; init => _des = value.Replace("<em>", "").Replace("</em>", ""); }
-    public string Link { get; init; } = "";
+    public string Link { get; set; } = "";
 }

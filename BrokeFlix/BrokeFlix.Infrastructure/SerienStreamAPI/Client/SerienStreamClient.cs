@@ -110,7 +110,16 @@ public class SerienStreamClient
             {
                 PropertyNameCaseInsensitive = true
             });
-        return result ?? Array.Empty<SearchSeries>();
+
+        if (result is null) return Array.Empty<SearchSeries>();
+
+        var searchSeriesAsync = result.ToList();
+        foreach (var res in searchSeriesAsync.ToList())
+        {
+            res.Link = hostUrl + res.Link;
+        }
+
+        return searchSeriesAsync;
     }
 
 

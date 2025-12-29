@@ -4,6 +4,7 @@ import 'package:brokeflix_client/core/shared/data_service.dart';
 import 'package:brokeflix_client/core/shared/models/search_series_model.dart';
 import 'package:brokeflix_client/core/shared/utils/app_logger.dart';
 import 'package:brokeflix_client/ui/views/series_detail_view.dart';
+import 'package:brokeflix_client/ui/widgets/webview_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -56,17 +57,13 @@ class SearchSeriesViewModel extends BaseViewModel {
     series.then((value) {
       if (!ctx.mounted) return;
 
-      if (value != null) {
-        Navigator.of(ctx).push(
-          MaterialPageRoute(
-            builder: (context) => SeriesDetailView(series: value),
-          ),
-        );
-      }
-
-      debugPrint("showing off");
-
-      return null;
+      Navigator.of(ctx).push(
+        MaterialPageRoute(
+          builder: (context) => value != null
+              ? SeriesDetailView(series: value)
+              : WebViewPageWidget(title: data.title, url: data.link),
+        ),
+      );
     });
   }
 }
