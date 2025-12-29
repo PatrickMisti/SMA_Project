@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
@@ -30,9 +31,8 @@ class VideoPlayerViewModel extends BaseViewModel {
     if (checkUrl(path)) {
       _controller = VideoPlayerController.networkUrl(Uri.parse(path));
     } else {
-      // final videoPath = File(path);
-      // _controller = VideoPlayerController.file(videoPath);
-      _controller = VideoPlayerController.asset(path);
+      final videoPath = File(path);
+      _controller = VideoPlayerController.file(videoPath);
     }
     if (!kIsWeb) {
       registerVolume();
