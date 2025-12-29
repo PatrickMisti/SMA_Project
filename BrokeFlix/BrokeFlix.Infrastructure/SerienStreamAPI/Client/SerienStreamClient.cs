@@ -116,7 +116,9 @@ public class SerienStreamClient
         var searchSeriesAsync = result.ToList();
         foreach (var res in searchSeriesAsync.ToList())
         {
-            res.Link = hostUrl + res.Link;
+            var uri = new UriBuilder(hostUrl);
+            uri.Path = res.Link;
+            res.Link = uri.Uri.ToString();
         }
 
         return searchSeriesAsync;
