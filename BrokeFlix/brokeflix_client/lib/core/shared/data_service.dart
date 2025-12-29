@@ -14,12 +14,12 @@ class DataService implements Disposable {
 
   final BehaviorSubject<List<Series>> _popularSeriesSubject;
   final BehaviorSubject<List<GroupSeries>> _allGroupedSubject;
-  final BehaviorSubject<List<SearchSeries>> _searchSeriesSubject;
+  final BehaviorSubject<List<SearchSeries>?> _searchSeriesSubject;
 
   DataService()
     : _popularSeriesSubject = BehaviorSubject<List<Series>>(),
       _allGroupedSubject = BehaviorSubject<List<GroupSeries>>(),
-      _searchSeriesSubject = BehaviorSubject<List<SearchSeries>>();
+      _searchSeriesSubject = BehaviorSubject<List<SearchSeries>?>.seeded(null);
 
   BehaviorSubject<List<Series>> get popularSeriesStream =>
       _popularSeriesSubject;
@@ -27,7 +27,7 @@ class DataService implements Disposable {
   BehaviorSubject<List<GroupSeries>> get allGroupSeriesStream =>
       _allGroupedSubject;
 
-  BehaviorSubject<List<SearchSeries>> get searchSeriesStream =>
+  BehaviorSubject<List<SearchSeries>?> get searchSeriesStream =>
       _searchSeriesSubject;
 
   Future<void> fetchPopularSeries() async {
@@ -47,13 +47,20 @@ class DataService implements Disposable {
   }
 
   Future<void> fetchSearchSeries(String search) async {
-    final searchList = await http.getListWithQuery(
-      ConfigWrapper.searchUrl,
-      ConfigWrapper.searchPath,
-      {"search": search},
-      SearchSeries.fromJson,
-    );
-    _searchSeriesSubject.add(searchList);
+    try {
+      final searchList = await http.getListWithQuery(
+        ConfigWrapper.apiUrl,
+        ConfigWrapper.searchPath,
+        {"search": search},
+        SearchSeries.fromJson,
+      );
+      _searchSeriesSubject.add(searchList);
+    }
+    catch (e)
+    {
+      _logger.fine("Search exception: $e");
+      _searchSeriesSubject.add(null);
+    }
   }
 
   Future<Series?> fetchSeriesOnTitle(String title) async {

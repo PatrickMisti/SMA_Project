@@ -7,6 +7,8 @@ class ConfigWrapper {
 
   static String get popularSeriesUrl => '$_apiUrl/api/serienstream/popular';
 
+  static String get apiUrl => _apiUrl.toString();
+
   static String get allSeriesUrl => '$_apiUrl/api/serienstream/all';
 
   static String seriesUrl(String title) => '$_apiUrl/api/serienstream/$title';
@@ -21,7 +23,5 @@ class ConfigWrapper {
 
   static String get videoUrl => '$_apiUrl/api/serienstream/streamurl';
 
-  static String get searchUrl => '$_apiUrl/api/serienstream';
-
-  static String get searchPath => '/search';
+  static String get searchPath => '/api/serienstream/search';
 }

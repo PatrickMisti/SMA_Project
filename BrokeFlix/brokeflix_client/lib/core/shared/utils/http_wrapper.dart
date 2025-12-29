@@ -31,11 +31,14 @@ Future<List<T>> getList<T>(String url, Parser<T> parser) async {
 }
 
 Future<List<T>> getListWithQuery<T>(String url, String path, Map<String, String> query, Parser<T> parser) async {
-  _logger.info("Request: $url with query $query");
-  var uri = url.contains("https")
-      ? Uri.https(url,path,query)
-      : Uri.http(url, path, query);
+  var base = Uri.parse(url);
 
+  final uri = base.replace(
+    path: path,
+    queryParameters: query
+  );
+
+  _logger.info("Http Get Search with ${uri.toString()}");
   var response = await http.get(uri);
 
   if (response.statusCode != 200) {

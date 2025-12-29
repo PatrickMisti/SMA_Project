@@ -2,6 +2,7 @@
 import 'package:brokeflix_client/core/view_models/dashboard_viewmodel.dart';
 import 'package:brokeflix_client/ui/views/all_series_view.dart';
 import 'package:brokeflix_client/ui/views/popular_view.dart';
+import 'package:brokeflix_client/ui/views/search_series_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -28,7 +29,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
         children: [
           PopularView(),
           AllSeriesView(),
-          Center(child: Text('Dashboard View ${viewModel.currentIndex}')),
+          SearchSeriesView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

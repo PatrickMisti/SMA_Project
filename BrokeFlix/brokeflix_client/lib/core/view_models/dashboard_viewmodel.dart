@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 
 class DashboardViewModel extends BaseViewModel {
   PageController? pageController;
-  int _currentIndex = 1;
+  int _currentIndex = 2;
 
   DashboardViewModel() {
     pageController = PageController(initialPage: _currentIndex);
