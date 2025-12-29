@@ -5,7 +5,6 @@ import 'package:brokeflix_client/core/shared/models/search_series_model.dart';
 import 'package:brokeflix_client/core/shared/utils/app_logger.dart';
 import 'package:brokeflix_client/ui/views/series_detail_view.dart';
 import 'package:brokeflix_client/ui/widgets/webview_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
@@ -14,6 +13,7 @@ import 'package:stacked/stacked.dart';
 class SearchSeriesViewModel extends BaseViewModel {
   final _logger = AppLogger.getLogger("SearchSeriesViewModel");
   final DataService _dataService;
+  final _defaultBorder = 45.0;
 
   final TextEditingController searchFieldController;
   late final VoidCallback _textChanged;
@@ -57,12 +57,27 @@ class SearchSeriesViewModel extends BaseViewModel {
     series.then((value) {
       if (!ctx.mounted) return;
 
-      Navigator.of(ctx).push(
-        MaterialPageRoute(
-          builder: (context) => value != null
-              ? SeriesDetailView(series: value)
-              : WebViewPageWidget(title: data.title, url: data.link),
+      // WebViewPageWidget(title: data.title, url: data.link)
+      if (value != null) {
+        Navigator.of(ctx).push(
+          MaterialPageRoute(
+            builder: (context) => SeriesDetailView(series: value),
+          ),
+        );
+        return;
+      }
+
+      showModalBottomSheet(
+        context: ctx,
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(_defaultBorder),
+          ),
         ),
+        useSafeArea: true,
+        builder: (context) =>
+            WebViewPageWidget(title: data.title, url: data.link),
       );
     });
   }
