@@ -1,0 +1,6 @@
+services:
+  brokeflix.backend:
+    image: ${DOCKER_REGISTRY-}brokeflixbackend
+    build:
+      context: .
+      dockerfile: BrokeFlix.Backend/Dockerfile
