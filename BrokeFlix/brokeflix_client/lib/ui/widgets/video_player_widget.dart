@@ -74,6 +74,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     // restore defaults on dispose
     restoreFullScreen();
     _controller.isFullScreen.removeListener(_fullScreenListener);
+    _controller.dispose();
     super.dispose();
   }
 

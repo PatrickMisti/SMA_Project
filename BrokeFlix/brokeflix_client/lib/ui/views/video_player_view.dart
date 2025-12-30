@@ -150,5 +150,8 @@ class VideoPlayerView extends StackedView<VideoPlayerViewModel> {
   }
 
   @override
+  bool get disposeViewModel => false;
+
+  @override
   VideoPlayerViewModel viewModelBuilder(BuildContext context) => controller;
 }

@@ -124,7 +124,7 @@ class VideoPlayerViewModel extends BaseViewModel {
     }
   }
 
-  void timerWrapper(VoidCallback? call){
+  void timerWrapper(VoidCallback? call) {
     _tapTimer?.cancel();
     call?.call();
 
