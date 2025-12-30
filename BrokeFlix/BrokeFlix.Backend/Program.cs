@@ -17,6 +17,18 @@ builder.Services
         opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("prod", policy =>
+    {
+        policy
+            //.WithOrigins("https://client.zero.mistlberger.dev")
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddMemoryCache();
 
 builder.Services.AddRouting(o => o.LowercaseUrls = true);
@@ -35,6 +47,7 @@ if (app.Environment.IsDevelopment())
 if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 
+//app.UseCors("prod");
 
 app.UseAuthorization();
 
