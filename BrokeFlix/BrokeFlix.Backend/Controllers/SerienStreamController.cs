@@ -32,7 +32,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     {
         var episodes = await cache.GetOrCreateAsync($"{name}-{season}", async entry =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return await service.GetEpisodesOfSeries(name, season, token);
         });
 
@@ -52,7 +52,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     {
         var detail = await cache.GetOrCreateAsync($"{name}-{season}-{episode}", async entry =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return await service.GetVideoDetails(name, season, episode, token);
         });
 
@@ -70,7 +70,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
     {
         var stream = await cache.GetOrCreateAsync(streamGrab.url, async entry =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return await service.GetStreamUrl(streamGrab.host, streamGrab.url, token);
         });
 
@@ -89,7 +89,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
         var series = await cache.GetOrCreateAsync("popular_series", async entry =>
         {
             logger.LogInformation("Send Cached Data Popularity");
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return await service.GetPopularSeries(token);
         });
 
@@ -108,7 +108,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
         var series = await cache.GetOrCreateAsync("all_series", entry =>
         {
             logger.LogInformation("Send cached data all");
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(6);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
             return service.GetAllSeries(token);
         });
             

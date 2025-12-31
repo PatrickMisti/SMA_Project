@@ -23,5 +23,5 @@ class ConfigWrapper {     //  API_URL_vLocal  //  API_URL
 
   static String get videoUrl => '$_apiUrl/api/serienstream/streamurl';
 
-  static String get searchPath => '/api/serienstream/search';
+  static String get searchPath => '/v1/api/serienstream/search';
 }
