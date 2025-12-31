@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
 if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 
-//app.UseCors("prod");
+app.UseCors("prod");
 
 app.UseAuthorization();
 

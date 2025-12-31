@@ -12,16 +12,16 @@ import 'package:brokeflix_client/core/shared/utils/http_wrapper.dart' as http;
 class DataService implements Disposable {
   final _logger = AppLogger.getLogger("DataService");
 
-  final BehaviorSubject<List<Series>> _popularSeriesSubject;
+  final BehaviorSubject<List<Series>?> _popularSeriesSubject;
   final BehaviorSubject<List<GroupSeries>> _allGroupedSubject;
   final BehaviorSubject<List<SearchSeries>?> _searchSeriesSubject;
 
   DataService()
-    : _popularSeriesSubject = BehaviorSubject<List<Series>>(),
+    : _popularSeriesSubject = BehaviorSubject<List<Series>?>(),
       _allGroupedSubject = BehaviorSubject<List<GroupSeries>>(),
       _searchSeriesSubject = BehaviorSubject<List<SearchSeries>?>.seeded(null);
 
-  BehaviorSubject<List<Series>> get popularSeriesStream =>
+  BehaviorSubject<List<Series>?> get popularSeriesStream =>
       _popularSeriesSubject;
 
   BehaviorSubject<List<GroupSeries>> get allGroupSeriesStream =>
@@ -31,11 +31,10 @@ class DataService implements Disposable {
       _searchSeriesSubject;
 
   Future<void> fetchPopularSeries() async {
-    final seriesList = await http.getList(
+    return http.getList(
       ConfigWrapper.popularSeriesUrl,
       Series.fromJson,
-    );
-    _popularSeriesSubject.add(seriesList);
+    ).then((seriesList) => _popularSeriesSubject.add(seriesList));
   }
 
   Future<void> fetchAllGroupSeries() async {
