@@ -38,11 +38,15 @@ class DataService implements Disposable {
   }
 
   Future<void> fetchAllGroupSeries() async {
-    final seriesList = await http.getList(
-      ConfigWrapper.allSeriesUrl,
-      GroupSeries.fromJson,
-    );
-    _allGroupedSubject.add(seriesList);
+    try{
+      final seriesList = await http.getList(
+        ConfigWrapper.allSeriesUrl,
+        GroupSeries.fromJson,
+      );
+      _allGroupedSubject.add(seriesList);
+    } catch (e) {
+      _logger.warning("Loading all series failed!");
+    }
   }
 
   Future<void> fetchSearchSeries(String search) async {

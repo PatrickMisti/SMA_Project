@@ -39,12 +39,19 @@ class SearchSeriesView extends StackedView<SearchSeriesViewModel> {
                     SliverToBoxAdapter(child: Center(child: Text(_errorText))),
                 onEmpty: () =>
                     SliverToBoxAdapter(child: Center(child: Text(_errorText))),
-                onData: (data) => SliverList.builder(
-                  itemBuilder: (context, index) =>
-                      ListTile(
-                        onTap: () => vm.getDetailPage(data[index], context),
-                          title: Text(data![index].title)),
-                ),
+                onData: (data) => data!.isNotEmpty
+                    ? SliverList.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () => vm.getDetailPage(data[index], context),
+                            title: Text(data[index].title),
+                          );
+                        },
+                      )
+                    : SliverToBoxAdapter(
+                        child: Center(child: Text(_errorText)),
+                      ),
               ),
         ),
       ],

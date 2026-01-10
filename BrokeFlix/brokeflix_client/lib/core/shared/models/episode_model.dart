@@ -41,10 +41,11 @@ class Episode {
   };
 
   DropdownMenuItem<int> toDropdownMenuItem({bool fullTitle = true}) {
-    var text = title.length > 10
-        ? '${title.substring(0, 10)}...'
-        : title;
-    text = fullTitle ? title : text;
+    var resTitle = title.isEmpty ? originalTitle: title;
+    var text = resTitle.length > 10
+        ? '${resTitle.substring(0, 10)}...'
+        : resTitle;
+    text = fullTitle ? resTitle : text;
     return DropdownMenuItem<int>(
       value: number,
       child: Text(text),
