@@ -108,7 +108,7 @@ public class SerienStreamController(SerienStreamService service, IMemoryCache ca
         var series = await cache.GetOrCreateAsync("all_series", entry =>
         {
             logger.LogInformation("Send cached data all");
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return service.GetAllSeries(token);
         });
             
