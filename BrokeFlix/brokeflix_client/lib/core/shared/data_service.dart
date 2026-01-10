@@ -68,7 +68,7 @@ class DataService implements Disposable {
 
   Future<Series?> fetchSeriesOnTitle(String title) async {
     try {
-      final series = await http.get(ConfigWrapper.seriesUrl(title), Series.fromJson);
+      final series = await http.get(ConfigWrapper.seriesUrl(title), Series.fromJson).timeout(const Duration(seconds: 7));
       return series;
     } catch (e) {
       _logger.shout("Error to load Series on tile!");
