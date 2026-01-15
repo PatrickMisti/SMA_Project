@@ -108,7 +108,12 @@ class VideoPlayerViewModel extends BaseViewModel {
   void seekEnd() => timerWrapper(null);
 
   double get getPosition {
-    return currentTime.value.inMilliseconds / time.value.inMilliseconds;
+    var pos = currentTime.value.inMilliseconds / time.value.inMilliseconds;
+    if (pos < 0.0 || pos > 1.0 || pos.isNaN) {
+      return 0.0;
+    }
+
+    return pos;
   }
 
   onTapOrHover(bool value) {
