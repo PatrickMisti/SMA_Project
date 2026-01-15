@@ -18,21 +18,22 @@ class SeriesListWidget extends StatefulWidget {
 }
 
 class _SeriesListWidgetState extends State<SeriesListWidget> {
+  final _maxFit = 250.0;
+  final _spacer = 8.0;
+  final _aspectRatio = .75;
 
   Future<void> refresh() async => await widget.viewModel.refreshUi();
 
   _buildGridSliver(List<Series> seriesList) {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-        childAspectRatio: 0.7,
-      ),
-      delegate: SliverChildBuilderDelegate(
-            (context, index) =>
+    return SliverGrid.extent(
+      maxCrossAxisExtent: _maxFit,
+      childAspectRatio: _aspectRatio,
+      crossAxisSpacing: _spacer,
+      mainAxisSpacing: _spacer,
+      children: List.generate(
+        seriesList.length,
+        (index) =>
             SeriesItemWidget(key: ValueKey(index), series: seriesList[index]),
-        childCount: seriesList.length,
       ),
     );
   }
@@ -45,12 +46,10 @@ class _SeriesListWidgetState extends State<SeriesListWidget> {
       child: CustomScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
-
           SliverPadding(
             padding: const EdgeInsets.all(8.0),
             sliver: _buildGridSliver(seriesList),
           ),
-
         ],
       ),
     );
